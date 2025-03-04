@@ -152,6 +152,26 @@ set(\@PROJECT_NAME\@_LIBRARIES \@PROJECT_NAME\@::QpSolverCollection)
     )
 endif()
 
+install(TARGETS qp_solver_collection
+  EXPORT qp_solver_collectionTargets
+  ARCHIVE DESTINATION lib
+  LIBRARY DESTINATION lib
+  RUNTIME DESTINATION bin
+)
+
+install(EXPORT qp_solver_collectionTargets
+  FILE qp_solver_collectionConfig.cmake
+  DESTINATION share/qp_solver_collection/cmake
+)
+
+install(DIRECTORY include/
+  DESTINATION include
+)
+
+install(DIRECTORY launch/
+  DESTINATION share/qp_solver_collection/
+)
+
 if(BUILD_TESTING)
   add_subdirectory(tests)
 endif()
