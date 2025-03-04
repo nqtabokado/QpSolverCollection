@@ -101,6 +101,8 @@ configure_file("${QP_SOLVER_OPTIONS_HEADER_FILE}.in" "${QP_SOLVER_OPTIONS_HEADER
 set(QP_SOLVER_OPTIONS_CMAKE_FILE "${PROJECT_SOURCE_DIR}/cmake/qp_solver_options.cmake")
 configure_file("${QP_SOLVER_OPTIONS_CMAKE_FILE}.in" "${QP_SOLVER_OPTIONS_CMAKE_FILE}")
 
+add_subdirectory(src)
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include)
 add_library(qp_solver_collection SHARED
   src/QpSolverCollection.cpp
   src/QpSolverHpipm.cpp
@@ -115,7 +117,10 @@ add_library(qp_solver_collection SHARED
   src/QpSolverQuadprog.cpp
 )
 
-add_subdirectory(src)
+target_include_directories(qp_solver_collection PUBLIC
+  $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+  $<INSTALL_INTERFACE:include>
+)
 
 if(NOT USE_ROS2)
   install(EXPORT ${PROJECT_NAME}
