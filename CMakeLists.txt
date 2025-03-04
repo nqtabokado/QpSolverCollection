@@ -101,6 +101,20 @@ configure_file("${QP_SOLVER_OPTIONS_HEADER_FILE}.in" "${QP_SOLVER_OPTIONS_HEADER
 set(QP_SOLVER_OPTIONS_CMAKE_FILE "${PROJECT_SOURCE_DIR}/cmake/qp_solver_options.cmake")
 configure_file("${QP_SOLVER_OPTIONS_CMAKE_FILE}.in" "${QP_SOLVER_OPTIONS_CMAKE_FILE}")
 
+add_library(qp_solver_collection SHARED
+  src/QpSolverCollection.cpp
+  src/QpSolverHpipm.cpp
+  src/QpSolverJrlqp.cpp
+  src/QpSolverLssol.cpp
+  src/QpSolverNasoq.cpp
+  src/QpSolverOsqp.cpp
+  src/QpSolverProxqp.cpp
+  src/QpSolverQld.cpp
+  src/QpSolverQpmad.cpp
+  src/QpSolverQpoases.cpp
+  src/QpSolverQuadprog.cpp
+)
+
 add_subdirectory(src)
 
 if(NOT USE_ROS2)
